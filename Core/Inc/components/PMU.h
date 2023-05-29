@@ -13,5 +13,7 @@
 
 #include "stm32f4xx_hal.h"
 
+void PMU_Init(void); //prototype function
+
 
 #endif /* INC_COMPONENTS_PMU_H_ */
