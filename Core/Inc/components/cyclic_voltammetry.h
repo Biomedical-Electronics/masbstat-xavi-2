@@ -12,6 +12,8 @@
 #define INC_COMPONENTS_CYCLIC_VOLTAMMETRY_H_
 
 #include "main.h"
+#include "components/rele.h"
+
 
 struct CV_Configuration_S {
 
@@ -23,5 +25,7 @@ struct CV_Configuration_S {
 	double eStep;
 
 };
+
+void get_CV_measure(struct CV_Configuration_S);
 
 #endif /* INC_COMPONENTS_CYCLIC_VOLTAMMETRY_H_ */
