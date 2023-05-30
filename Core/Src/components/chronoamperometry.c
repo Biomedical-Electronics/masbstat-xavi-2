@@ -15,6 +15,7 @@ void get_CA_measure(struct CA_Configuration_S){
 	measurementTime = CA_Configuration.measurementTime*1000;
 
 	//Fijar tension Vcell a eDC
+	MCP4725_SetOutputVoltage(hdac, calculateDacOutputVoltage(eDC)); // NUEVA TENSION
 
 	close_rele();
 

@@ -14,6 +14,7 @@
 #include "main.h"
 #include "rele.h"
 #include "timers.h"
+#include "formulas.h"
 
 uint32_t num_measurment_times;
 
