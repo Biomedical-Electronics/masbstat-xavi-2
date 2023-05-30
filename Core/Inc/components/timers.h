@@ -16,6 +16,6 @@ uint32_t samplingPeriodMs;
 _Bool Sampling_Period_Completed;
 
 void Sample_Period_Ellaspsed(void);
-
+void Timer_start_config(void);
 
 #endif /* INC_COMPONENTS_TIMERS_H_ */
