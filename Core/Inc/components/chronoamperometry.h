@@ -13,6 +13,9 @@
 
 #include "main.h"
 #include "rele.h"
+#include "timers.h"
+
+uint32_t trigger_measurement_time;
 
 struct CA_Configuration_S {
 

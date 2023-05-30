@@ -19,15 +19,16 @@ void get_CA_measure(struct CA_Configuration_S){
 
 	close_rele();
 
-	//Llamar funcion timer para que inicie el timer_2 y nos diga el tiempo
+	trigger_measurement_cycles = 0;
 
-	//TimeMs = funcion_timer();
 
-	while(TimeMs < measurementTime){
-		if(TimeMs % samplingPeriod == 0){
+	while(trigger_measurement_cycles*Sampling_Period_Completed < measurementTime){
+		if(Sampling_Period_Completed == TRUE){
 
 			//Medir
 			//Enviar datos
+			Sample_Period_Ellaspsed();
+			++trigger_measurement_cycles;
 
 		}
 	}
