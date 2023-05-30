@@ -5,36 +5,34 @@
  *      Author: xgome
  */
 
-#include "components/chronoamperomety.h"
+#include "components/chronoamperometry.h"
 
 
 void get_CA_measure(struct CA_Configuration_S){
 
 	eDC = CA_Configuration_S.eDC;
 	samplingPeriod = CA_Configuration.samplingPeriodMs;
-	measurementTime = CA_Configuration.measurementTime;
-
+	measurementTime = CA_Configuration.measurementTime*1000;
 
 	//Fijar tension Vcell a eDC
 
 	close_rele();
 
-	trigger_measurement_cycles = 0;
-	Timer_start_config();
+	num_measurment_times = 0; //num
+	Timer_start_config(samplingPeriod);
 
-	while(trigger_measurement_cycles*Sampling_Period_Completed < measurementTime){
+	while(num_measurment_times*samplingPeriod < measurementTime){
 		if(Sampling_Period_Completed == TRUE){
-
 			//Medir
 			//Enviar datos
-			Sample_Period_Ellaspsed();
+			Clear_Sample_Period_Ellapsed_Flag();
 			++trigger_measurement_cycles;
 
 		}
 	}
 
 	//Parar y resetear el timer
-	Timer_reset_config();
+	Timer_Stop();
 
 	open_rele();
 }
