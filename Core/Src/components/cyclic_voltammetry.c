@@ -29,35 +29,37 @@ void get_CV_measure(struct CV_Configuration_S){
 			//medir
 			//enviar datos al host
 			Sampling_Period_Completed == FALSE;
-		}
 
-		else if(V_cell == V_objective){
-			if(V_objective == eVertex1){
-				V_objective = eVertex2;
-			}
-			else if(V_objective = eVertex2){
-				V_objective = eBegin;
-			}
-			else if(V_objective == eBegin){
-				if(actual_cycle == cycles_objective){
-					break;
 
+			if(V_cell == V_objective){
+				if(V_objective == eVertex1){
+					V_objective = eVertex2;
+				}
+				else if(V_objective = eVertex2){
+					V_objective = eBegin;
+				}
+				else if(V_objective == eBegin){
+					if(actual_cycle == cycles_objective){
+						open_rele();
+						break;
+
+						}
+					else if(actual_cycle < cycles_objective){
+						V_objective = eVertex1;
+						actual_cycle++; //si estoy en el penultimo y se me suma
+						//el siguiente elseif lo cumplira o lo saltara?
 					}
-				else if(actual_cycle < cycles_objective){
-					V_objective = eVertex1;
-					actual_cycle++; //si estoy en el penultimo y se me suma
-					//el siguiente elseif lo cumplira o lo saltara?
 				}
 			}
-		}
-		else if(V_cell != V_objective){
-			if(V_cell + eStep >= V_objective){
-				V_cell = V_objective;
-			}
-			else{
-				V_cell = V_cell + eStep;
-			}
+			else if(V_cell != V_objective){
+				if(V_cell + eStep >= V_objective){
+					V_cell = V_objective;
+				}
+				else{
+					V_cell = V_cell + eStep;
+				}
 
+			}
 		}
 
 
