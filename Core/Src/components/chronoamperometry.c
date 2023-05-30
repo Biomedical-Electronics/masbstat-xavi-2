@@ -20,7 +20,7 @@ void get_CA_measure(struct CA_Configuration_S){
 	close_rele();
 
 	trigger_measurement_cycles = 0;
-
+	Timer_start_config();
 
 	while(trigger_measurement_cycles*Sampling_Period_Completed < measurementTime){
 		if(Sampling_Period_Completed == TRUE){
@@ -34,6 +34,7 @@ void get_CA_measure(struct CA_Configuration_S){
 	}
 
 	//Parar y resetear el timer
+	Timer_reset_config();
 
 	open_rele();
 }
