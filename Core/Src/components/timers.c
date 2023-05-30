@@ -7,20 +7,24 @@
 
 #include "components/timers.h"
 
-void Timer_start_config(void){
+extern TIM_HandleTypeDef htim2;
 
-	MX_TIM2_Init();
+void Timer_start_config(uint32_t samplingPeriodMs) {
+
+	__HAL_TIM_SET_AUTORELOAD(&htim2, samplingPeriodMs * 10);
+	__HAL_TIM_SET_COUNTER(&htim2, 0);
+	clear_Sample_Period_Ellaspsed_Flag();
 	HAL_TIM_Base_Start_IT(&htim2);
-
-	HAL_TIM_SET_AUTORELOAD(TIM_HandleTypeDef*htim2, samplingPeriodMs*10);
-
-	void HAL_TIMPeriodElapsedCallback(TIM_HandleTypeDef*htim){
-		Sampling_Period_Completed = TRUE;
-
-		}
 }
 
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
+	Sampling_Period_Completed = TRUE;
+}
 
-void Sample_Period_Ellaspsed(void){
+void Clear_Sample_Period_Ellaspsed_Flag(void) {
 	Sampling_Period_Completed = FALSE;
+}
+
+void Timer_Stop(void) {
+	HAL_TIM_Base_Stop_IT(&htim2);
 }
