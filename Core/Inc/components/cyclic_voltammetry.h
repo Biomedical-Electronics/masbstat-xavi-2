@@ -13,6 +13,11 @@
 
 #include "main.h"
 #include "components/rele.h"
+#include "components/adc.h"
+#include "components/formulas.h"
+#include "components/masb_comm_s.h"
+#include "components/timers.h"
+
 
 
 struct CV_Configuration_S {
