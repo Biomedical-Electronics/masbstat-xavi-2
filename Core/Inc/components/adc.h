@@ -15,8 +15,8 @@
  double I_cell = 0;
  extern ADC_HandleTypeDef hadc1;
 
-double get_V_CA(void);
-double get_I_CA(void);
+double get_Voltage(void);
+double get_Intensity(void);
 
 
 #endif /* INC_COMPONENTS_ADC_H_ */
