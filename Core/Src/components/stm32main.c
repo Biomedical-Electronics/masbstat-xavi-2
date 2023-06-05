@@ -12,26 +12,33 @@
 struct CV_Configuration_S cvConfiguration;
 struct CA_Configuration_S caConfiguration;
 struct Data_S data;
+static MCP4725_Handle_T hdac = NULL;
 
 void setup(struct Handles_S *handles) {
 	PMU_init();
 
 	I2C_init(&hi2c1);
 
-		AD5280_Handle_T hpot = NULL;
+	hdac = MCP4725_Init();
 
-		hpot = AD5280_Init();
+	MCP4725_ConfigSlaveAddress(hdac, 0x66); // DIRECCION DEL ESCLAVO
+	MCP4725_ConfigVoltageReference(hdac, 4.0f); // TENSION DE REFERENCIA
+	MCP4725_ConfigWriteFunction(hdac, I2C_write); // FUNCION DE ESCRITURA (libreria I2C_lib)
 
-		// Configuramos su direccion I2C de esclavo, su resistencia total (hay
-		// diferentes modelos; este tiene 50kohms) e indicamos que funcion queremos que
-		// se encargue de la escritura a traves del I2C. Utilizaremos la funcion
-		// I2C_Write de la libreria i2c_lib.
-		AD5280_ConfigSlaveAddress(hpot, 0x2C);
-		AD5280_ConfigNominalResistorValue(hpot, 50e3f);
-		AD5280_ConfigWriteFunction(hpot, I2C_write);
+	AD5280_Handle_T hpot = NULL;
 
-		// Fijamos la resistencia de 50 kohms.
-		AD5280_SetWBResistance(hpot, 50e3f);
+	hpot = AD5280_Init();
+
+	// Configuramos su direccion I2C de esclavo, su resistencia total (hay
+	// diferentes modelos; este tiene 50kohms) e indicamos que funcion queremos que
+	// se encargue de la escritura a traves del I2C. Utilizaremos la funcion
+	// I2C_Write de la libreria i2c_lib.
+	AD5280_ConfigSlaveAddress(hpot, 0x2C);
+	AD5280_ConfigNominalResistorValue(hpot, 50e3f);
+	AD5280_ConfigWriteFunction(hpot, I2C_write);
+
+	// Fijamos la resistencia de 50 kohms.
+	AD5280_SetWBResistance(hpot, 50e3f);
 
 	MASB_COMM_S_setUart(handles -> huart);
 	MASB_COMM_S_waitForMessage();
