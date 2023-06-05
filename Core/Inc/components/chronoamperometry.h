@@ -12,9 +12,11 @@
 #define INC_COMPONENTS_CHRONOAMPEROMETRY_H_
 
 #include "main.h"
-#include "rele.h"
-#include "timers.h"
-#include "formulas.h"
+#include "components/rele.h"
+#include "components/timers.h"
+#include "components/formulas.h"
+#include "components/masb_comm_s.h"
+#include "components/adc.h"
 
 uint32_t num_measurment_times;
 
@@ -25,6 +27,7 @@ struct CA_Configuration_S {
 	uint32_t measurementTime;
 
 };
+
 
 void get_CA_measure(struct CA_Configuration_S);
 
