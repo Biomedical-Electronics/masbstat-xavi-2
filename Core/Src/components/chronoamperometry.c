@@ -18,13 +18,13 @@ void get_CA_measure(struct CA_Configuration_S){
 	MCP4725_SetOutputVoltage(hdac, calculateDacOutputVoltage(eDC)); // NUEVA TENSION
 
 	close_rele();
-	num_measurment_times = 0; //num
+	num_measurment_times = 1; //num
 	Timer_start_config(samplingPeriod);
 
 	while(num_measurment_times*samplingPeriod < measurementTime){
 		if(Sampling_Period_Completed == TRUE){
-			V_ref = get_V_CA();
-			I_cell = get_I_CA();
+			V_ref = get_Voltage();
+			I_cell = get_Intensity();
 			data.point = num_measurment_times;
 			data.timeMs = num_measurment_times*samplingPeriod;
 			data.voltage = V_ref;
