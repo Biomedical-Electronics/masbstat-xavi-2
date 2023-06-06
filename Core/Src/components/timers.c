@@ -9,12 +9,13 @@
 #include "components/timers.h"
 
 extern TIM_HandleTypeDef htim2;
+volatile _Bool Sampling_Period_Completed;
 
 void Timer_start_config(uint32_t samplingPeriodMs) {
 
 	__HAL_TIM_SET_AUTORELOAD(&htim2, samplingPeriodMs * 10);
 	__HAL_TIM_SET_COUNTER(&htim2, 0);
-	clear_Sample_Period_Ellaspsed_Flag();
+	Clear_Sample_Period_Ellaspsed_Flag();
 	HAL_TIM_Base_Start_IT(&htim2);
 }
 

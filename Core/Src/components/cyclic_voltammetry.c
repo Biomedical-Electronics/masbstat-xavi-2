@@ -7,23 +7,26 @@
 
 #include "components/cyclic_voltammetry.h"
 
-extern Sampling_Period_Completed;
+extern volatile _Bool Sampling_Period_Completed;
+struct CV_Configuration_S prvCvConfiguration;
+struct Data_S cvData;
+static MCP4725_Handle_T hdac = NULL;
 
 
-void get_CV_measure(struct CV_Configuration_S){
+void get_CV_measure(struct CV_Configuration_S prvCvConfiguration){
 
-	double eBegin = CV_Configuration_S.eBegin;
+	double eBegin = prvCvConfiguration.eBegin;
 	double V_cell = eBegin ;
-	double eVertex1 = CV_Configuration_S.eVertex1;
-	double eVertex2 = CV_Configuration_S.eVertex2;
+	double eVertex1 = prvCvConfiguration.eVertex1;
+	double eVertex2 = prvCvConfiguration.eVertex2;
 	double V_objective = eVertex1;
 
-	uint8_t cycles_objective = CV_Configuration_S.cycles;
+	uint8_t cycles_objective = prvCvConfiguration.cycles;
 	uint8_t actual_cycle = 1;
 	uint8_t num_measurment_times = 1;
 
-	double eStep = CV_Configuration_S.eStep;
-	double scanRate = CV_Configuration_S.scanRate;
+	double eStep = prvCvConfiguration.eStep;
+	double scanRate = prvCvConfiguration.scanRate;
 	//calcular_sampleperiod
 	double samplingPeriod = (eStep/scanRate)*1000;
 
@@ -38,25 +41,25 @@ void get_CV_measure(struct CV_Configuration_S){
 	while (1){
 		if(Sampling_Period_Completed){
 			//medir
-			V_cell = get_Voltage();
-			I_cell = get_Intensity();
+			double V_cell = get_Voltage();
+			double I_cell = get_Intensity();
 
 			//enviar datos al host
-			data.point = num_measurment_times;
-			data.timeMs = num_measurment_times*samplingPeriod;
-			data.voltage = V_cell;
-			data.current = I_cell;
-			MASB_COMM_S_sendData(data);
+			cvData.point = num_measurment_times;
+			cvData.timeMs = num_measurment_times*samplingPeriod;
+			cvData.voltage = V_cell;
+			cvData.current = I_cell;
+			MASB_COMM_S_sendData(cvData);
 
 
-			Clear_Sample_Period_Ellapsed_Flag();
+			Clear_Sample_Period_Ellaspsed_Flag();
 			++num_measurment_times;
 
 			if(V_cell == V_objective){
 				if(V_objective == eVertex1){
 					V_objective = eVertex2;
 				}
-				else if(V_objective = eVertex2){
+				else if(V_objective == eVertex2){
 					V_objective = eBegin;
 				}
 				else if(V_objective == eBegin){

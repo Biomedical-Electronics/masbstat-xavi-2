@@ -17,6 +17,7 @@
 #include "components/formulas.h"
 #include "components/masb_comm_s.h"
 #include "components/timers.h"
+#include "components/mcp4725_driver.h"
 
 
 
@@ -30,6 +31,7 @@ struct CV_Configuration_S {
 	double eStep;
 
 };
+
 
 void get_CV_measure(struct CV_Configuration_S);
 

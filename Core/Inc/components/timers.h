@@ -15,10 +15,9 @@
 #define TRUE 1
 #define FALSE 0
 
-volatile _Bool Sampling_Period_Completed;
-
-void Sample_Period_Ellaspsed(void);
+void Clear_Sample_Period_Ellaspsed_Flag(void);
 void Timer_start_config(uint32_t samplingPeriodMs);
+void Timer_Stop(void);
 
 
 #endif /* INC_COMPONENTS_TIMERS_H_ */
