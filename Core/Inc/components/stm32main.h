@@ -11,6 +11,8 @@
 #include "main.h"
 #include "components/PMU.h"
 #include "components/mcp4725_driver.h"
+#include "components/chronoamperometry.c"
+#include "components/cyclic_voltametry.c"
 
 struct Handles_S {
     UART_HandleTypeDef *huart;
