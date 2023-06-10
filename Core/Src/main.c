@@ -107,8 +107,8 @@ int main(void)
   struct Handles_S myHandles;  //to pass the different pointers to the Handles structure
       myHandles.huart2 = &huart2; //huart pointer
       myHandles.hadc1 = &hadc1; //adc pointer
-      myHandles.htim3 = &htim2; //adc pointer
-      myHandles.hi2c = &hi2c1; //i2c pointer
+      myHandles.htim2 = &htim2; //adc pointer
+      myHandles.hi2c1 = &hi2c1; //i2c pointer
   setup(&myHandles);
   /* USER CODE END 2 */
 
