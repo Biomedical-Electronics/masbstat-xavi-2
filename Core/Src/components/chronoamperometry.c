@@ -6,32 +6,32 @@
  */
 
 #include "components/chronoamperometry.h"
+extern volatile _Bool Sampling_Period_Completed;
+struct CA_Configuration_S prvCaConfiguration;
+struct Data_S caData;
+static MCP4725_Handle_T hdac = NULL;
 
 
-void get_CA_measure(struct CA_Configuration_S){
+void get_CA_measure(struct CA_Configuration_S prvCaConfiguration){
 
-	eDC = CA_Configuration_S.eDC;
-	samplingPeriod = CA_Configuration.samplingPeriodMs;
-	measurementTime = CA_Configuration.measurementTime*1000;
+	uint32_t measurementTime = prvCaConfiguration.measurementTime*1000;
 
 	//Fijar tension Vcell a eDC
-	MCP4725_SetOutputVoltage(hdac, calculateDacOutputVoltage(eDC)); // NUEVA TENSION
+	MCP4725_SetOutputVoltage(hdac, calculateDacOutputVoltage(prvCaConfiguration.eDC)); // NUEVA TENSION
 
 	close_rele();
-	num_measurment_times = 1; //num
-	Timer_start_config(samplingPeriod);
+	uint32_t num_measurment_times = 1; //num
+	Timer_start_config(prvCaConfiguration.samplingPeriodMs);
 
-	while(num_measurment_times*samplingPeriod < measurementTime){
+	while(num_measurment_times*prvCaConfiguration.samplingPeriodMs < measurementTime){
 		if(Sampling_Period_Completed == TRUE){
-			V_ref = get_Voltage();
-			I_cell = get_Intensity();
-			data.point = num_measurment_times;
-			data.timeMs = num_measurment_times*samplingPeriod;
-			data.voltage = V_ref;
-			data.current = I_cell;
-			MASB_COMM_S_sendData(data);
+			caData.point = num_measurment_times;
+			caData.timeMs = num_measurment_times*prvCaConfiguration.samplingPeriodMs;
+			caData.voltage = get_Voltage();
+			caData.current = get_Intensity();
+			MASB_COMM_S_sendData(caData);
 
-			Clear_Sample_Period_Ellapsed_Flag();
+			Clear_Sample_Period_Ellaspsed_Flag();
 			++num_measurment_times;
 
 		}

@@ -11,8 +11,6 @@
 #include "main.h"
 #include "formulas.h"
 
- double V_ref = 0;
- double I_cell = 0;
  extern ADC_HandleTypeDef hadc1;
 
 double get_Voltage(void);

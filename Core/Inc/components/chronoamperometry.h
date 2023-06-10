@@ -17,8 +17,9 @@
 #include "components/formulas.h"
 #include "components/masb_comm_s.h"
 #include "components/adc.h"
+#include "components/mcp4725_driver.h"
 
-uint32_t num_measurment_times;
+static uint32_t num_measurment_times;
 
 struct CA_Configuration_S {
 

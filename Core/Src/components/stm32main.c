@@ -13,11 +13,12 @@ struct CV_Configuration_S cvConfiguration;
 struct CA_Configuration_S caConfiguration;
 struct Data_S data;
 static MCP4725_Handle_T hdac = NULL;
+extern I2C_HandleTypeDef hi2c1;
 
-uint32_t State;
+enum State_type State;
 
 void setup(struct Handles_S *handles) {
-	PMU_init();
+	PMU_Init();
 
 	I2C_init(&hi2c1);
 
@@ -42,7 +43,6 @@ void setup(struct Handles_S *handles) {
 	// Fijamos la resistencia de 50 kohms.
 	AD5280_SetWBResistance(hpot, 50e3f);
 
-	MASB_COMM_S_setUart(handles -> huart);
 	MASB_COMM_S_waitForMessage();
 
 	State = IDLE;
@@ -94,8 +94,7 @@ void loop(void) {
        // Una vez procesado los comando, esperamos el siguiente
  		MASB_COMM_S_waitForMessage();
 
- 	}else{
- 		switch(State){
+ 	}switch(State){
  		case CV:
 
 			get_CV_measure(cvConfiguration);
@@ -119,7 +118,6 @@ void loop(void) {
  		default:
  			break;
 
- 		}
 
  	}
 
