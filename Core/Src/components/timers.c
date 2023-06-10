@@ -19,7 +19,7 @@ void Timer_start_config(uint32_t samplingPeriodMs) {
 	HAL_TIM_Base_Start_IT(&htim2);
 }
 
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef*htim2) {
 	Sampling_Period_Completed = TRUE;
 }
 
