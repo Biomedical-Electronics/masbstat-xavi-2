@@ -15,12 +15,12 @@ struct Data_S data;
 static MCP4725_Handle_T hdac = NULL;
 extern I2C_HandleTypeDef hi2c1;
 
-enum State_type State;
+volatile enum State_type{IDLE = 0, CV, CA}State;
 
 void setup(struct Handles_S *handles) {
 	PMU_Init();
 
-	I2C_init(&hi2c1);
+	I2C_init(handles -> hi2c);
 
 	AD5280_Handle_T hpot = NULL;
 
@@ -43,7 +43,7 @@ void setup(struct Handles_S *handles) {
 	MCP4725_ConfigVoltageReference(hdac, 4.0f); // TENSION DE REFERENCIA
 	MCP4725_ConfigWriteFunction(hdac, I2C_write); // FUNCION DE ESCRITURA (libreria I2C_lib)
 
-
+	MASB_COMM_S_setUart(handles->huart);
 	MASB_COMM_S_waitForMessage();
 
 	State = IDLE;
@@ -95,32 +95,44 @@ void loop(void) {
        // Una vez procesado los comando, esperamos el siguiente
  		MASB_COMM_S_waitForMessage();
 
- 	}switch(State){
- 		case CV:
+ 	}else{
+ 		switch(State){
+ 		 		case CV:
 
-			get_CV_measure(cvConfiguration);
+ 					get_CV_measure(cvConfiguration);
 
+<<<<<<< HEAD
 			//__NOP();
+=======
+ 					__NOP();
+>>>>>>> 803d70624f227afcda4c6c2b8f792abda1e1a423
 
-			State = IDLE;
+ 					State = IDLE;
 
-			break;
+ 					break;
 
- 		case CA:
+ 		 		case CA:
 
- 			get_CA_measure(caConfiguration);
+ 		 			get_CA_measure(caConfiguration);
 
+<<<<<<< HEAD
  			//__NOP();
+=======
+ 		 			__NOP();
+>>>>>>> 803d70624f227afcda4c6c2b8f792abda1e1a423
 
- 			State = IDLE;
+ 		 			State = IDLE;
 
- 			break;
+ 		 			break;
 
- 		default:
- 			break;
+ 		 		default:
+ 		 			break;
 
 
+ 		 	}
  	}
+
+
 
  	// Aqui es donde deberia de ir el codigo de control de las mediciones si se quiere implementar
    // el comando de STOP.

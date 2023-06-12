@@ -19,20 +19,13 @@
 struct Handles_S {
     UART_HandleTypeDef *huart;
 
-    ADC_HandleTypeDef *hadc1;
+    ADC_HandleTypeDef *hadc;
 
-    I2C_HandleTypeDef *hi2c1;
+    I2C_HandleTypeDef *hi2c;
 
-    TIM_HandleTypeDef *htim2;
+    TIM_HandleTypeDef *htim;
 
-    UART_HandleTypeDef *huart2;
     // Aqui iriamos anadiendo los diferentes XXX_HandleTypeDef que necesitaramos anadir.
-};
-
-enum State_type{
-	IDLE = 0,
-	CA,
-	CV,
 };
 
 
