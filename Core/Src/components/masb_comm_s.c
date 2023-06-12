@@ -12,7 +12,9 @@
 #include "components/masb_comm_s.h"
 #include "components/cobs.h"
 
+static UART_HandleTypeDef *huart;
 extern UART_HandleTypeDef huart2;
+
 //static UART_HandleTypeDef *huart2;
 
 uint8_t rxBuffer[UART_BUFF_SIZE] = { 0 },
@@ -44,6 +46,10 @@ union Long_Converter {
 	uint8_t b[4];
 
 } longConverter;
+
+void MASB_COMM_S_setUart(UART_HandleTypeDef*newHuart){
+	huart = newHuart;
+}
 
 void MASB_COMM_S_waitForMessage(void) {
 

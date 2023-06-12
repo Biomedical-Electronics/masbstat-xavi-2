@@ -40,7 +40,6 @@
 
 /* Private variables ---------------------------------------------------------*/
 ADC_HandleTypeDef hadc1;
-
 DMA_HandleTypeDef hdma_adc1;
 
 I2C_HandleTypeDef hi2c1;
@@ -105,10 +104,10 @@ int main(void)
   MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
   struct Handles_S myHandles;  //to pass the different pointers to the Handles structure
-      myHandles.huart2 = &huart2; //huart pointer
-      myHandles.hadc1 = &hadc1; //adc pointer
-      myHandles.htim2 = &htim2; //adc pointer
-      myHandles.hi2c1 = &hi2c1; //i2c pointer
+  myHandles.huart = &huart2; //huart pointer
+  myHandles.hadc = &hadc1; //adc pointer
+  myHandles.htim = &htim2; //adc pointer
+  myHandles.hi2c = &hi2c1; //i2c pointer
   setup(&myHandles);
   /* USER CODE END 2 */
 
