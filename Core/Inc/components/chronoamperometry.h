@@ -18,8 +18,11 @@
 #include "components/masb_comm_s.h"
 #include "components/adc.h"
 #include "components/mcp4725_driver.h"
+#include "components/ad5280_driver.h"
+#include "components/i2c_lib.h"
 
-static uint32_t num_measurment_times;
+
+
 
 struct CA_Configuration_S {
 
@@ -30,7 +33,7 @@ struct CA_Configuration_S {
 };
 
 
-void get_CA_measure(struct CA_Configuration_S);
+void get_CA_measure(struct CA_Configuration_S CaConfiguration);
 
 #endif /* INC_COMPONENTS_CHRONOAMPEROMETRY_H_ */
 

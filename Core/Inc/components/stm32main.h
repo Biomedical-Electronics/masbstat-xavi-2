@@ -15,6 +15,8 @@
 #include "components/cyclic_voltammetry.h"
 #include "components/i2c_lib.h"
 #include "components/ad5280_driver.h"
+#include "components/masb_comm_s.h"
+
 
 struct Handles_S {
     UART_HandleTypeDef *huart;

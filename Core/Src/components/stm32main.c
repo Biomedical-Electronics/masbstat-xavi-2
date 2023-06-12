@@ -13,7 +13,10 @@ struct CV_Configuration_S cvConfiguration;
 struct CA_Configuration_S caConfiguration;
 struct Data_S data;
 static MCP4725_Handle_T hdac = NULL;
-extern I2C_HandleTypeDef hi2c1;
+
+extern UART_HandleTypeDef huart;
+extern I2C_HandleTypeDef hi2c;
+
 
 volatile enum State_type{IDLE = 0, CV, CA}State;
 
@@ -39,7 +42,6 @@ void setup(struct Handles_S *handles) {
 
 
 	hdac = MCP4725_Init();
-
 	MCP4725_ConfigSlaveAddress(hdac, 0x66); // DIRECCION DEL ESCLAVO
 	MCP4725_ConfigVoltageReference(hdac, 4.0f); // TENSION DE REFERENCIA
 	MCP4725_ConfigWriteFunction(hdac, I2C_write); // FUNCION DE ESCRITURA (libreria I2C_lib)

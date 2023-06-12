@@ -6,7 +6,7 @@
  */
 
 #include "components/adc.h"
-
+extern ADC_HandleTypeDef hadc1;
 
 
 double get_Voltage(void){
