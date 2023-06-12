@@ -40,13 +40,10 @@ void setup(struct Handles_S *handles) {
 	// Fijamos la resistencia de 50 kohms.
 	AD5280_SetWBResistance(hpot, 50e3f);
 
-
 	hdac = MCP4725_Init();
 	MCP4725_ConfigSlaveAddress(hdac, 0x66); // DIRECCION DEL ESCLAVO
 	MCP4725_ConfigVoltageReference(hdac, 4.0f); // TENSION DE REFERENCIA
 	MCP4725_ConfigWriteFunction(hdac, I2C_write); // FUNCION DE ESCRITURA (libreria I2C_lib)
-
-
 
 	MASB_COMM_S_setUart(handles->huart);
 	MASB_COMM_S_waitForMessage();
@@ -66,7 +63,7 @@ void loop(void) {
 
 				cvConfiguration = MASB_COMM_S_getCvConfiguration();
 
- 				__NOP(); // Esta instruccion no hace nada y solo sirve para poder anadir un breakpoint
+ 				//__NOP(); // Esta instruccion no hace nada y solo sirve para poder anadir un breakpoint
 
  				State = CV;
 
@@ -75,7 +72,7 @@ void loop(void) {
 
  				caConfiguration = MASB_COMM_S_getCaConfiguration();
 
- 				__NOP();
+ 				//__NOP();
 
  				State = CA;
 
@@ -83,7 +80,7 @@ void loop(void) {
 
 			case STOP_MEAS: // Si hemos recibido STOP_MEAS
 
- 				__NOP(); // Esta instruccion no hace nada y solo sirve para poder anadir un breakpoint
+ 				//__NOP(); // Esta instruccion no hace nada y solo sirve para poder anadir un breakpoint
 
  				State = IDLE;
 
@@ -106,7 +103,11 @@ void loop(void) {
 
  					get_CV_measure(cvConfiguration);
 
+<<<<<<< HEAD
+			//__NOP();
+=======
  					__NOP();
+>>>>>>> 803d70624f227afcda4c6c2b8f792abda1e1a423
 
  					State = IDLE;
 
@@ -116,7 +117,11 @@ void loop(void) {
 
  		 			get_CA_measure(caConfiguration);
 
+<<<<<<< HEAD
+ 			//__NOP();
+=======
  		 			__NOP();
+>>>>>>> 803d70624f227afcda4c6c2b8f792abda1e1a423
 
  		 			State = IDLE;
 
