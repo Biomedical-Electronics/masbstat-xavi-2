@@ -103,11 +103,9 @@ void loop(void) {
 
  					get_CV_measure(cvConfiguration);
 
-<<<<<<< HEAD
+
 			//__NOP();
-=======
- 					__NOP();
->>>>>>> 803d70624f227afcda4c6c2b8f792abda1e1a423
+
 
  					State = IDLE;
 
@@ -117,13 +115,7 @@ void loop(void) {
 
  		 			get_CA_measure(caConfiguration);
 
-<<<<<<< HEAD
  			//__NOP();
-=======
- 		 			__NOP();
->>>>>>> 803d70624f227afcda4c6c2b8f792abda1e1a423
-
- 		 			State = IDLE;
 
  		 			break;
 
