@@ -12,6 +12,14 @@
 #define INC_COMPONENTS_CYCLIC_VOLTAMMETRY_H_
 
 #include "main.h"
+#include "components/rele.h"
+#include "components/adc.h"
+#include "components/formulas.h"
+#include "components/masb_comm_s.h"
+#include "components/timers.h"
+#include "components/mcp4725_driver.h"
+
+
 
 struct CV_Configuration_S {
 
@@ -23,5 +31,8 @@ struct CV_Configuration_S {
 	double eStep;
 
 };
+
+
+void get_CV_measure(struct CV_Configuration_S);
 
 #endif /* INC_COMPONENTS_CYCLIC_VOLTAMMETRY_H_ */
